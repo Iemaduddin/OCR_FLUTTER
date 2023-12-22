@@ -1,7 +1,13 @@
-# tubes
+# OCR TEXT APPS
+## Developed by: Group 5 TI-3C
 
-A new Flutter project.
-
+1. Arainal Aldiansyah
+2. Iemaduddin
+3. Kholid Maulidi
+4. Krysna Rachmat
+5. Rizqi Rohmatul Huda
+6. Yusril Ihza
+   
 ## Getting Started
 
 This project is a starting point for a Flutter application.

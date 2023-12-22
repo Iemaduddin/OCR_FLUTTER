@@ -31,7 +31,7 @@ def process_image():
         pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
         img_recolored_uint8 = (img_recolored * 255).astype(np.uint8)
-
+        # custom_config = r'--oem 3 --psm 6'
         # Deteksi teks pada gambar
         detected_text = pytesseract.image_to_string(img_recolored_uint8)
 

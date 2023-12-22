@@ -3,6 +3,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:image_picker_flutter/constants/Theme.dart';
+import 'package:image_picker_flutter/widgets/drawer.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -15,30 +18,32 @@ class _MyPageState extends State<MyPage> {
   File? imageFile;
   final imagePicker = ImagePicker();
   String resultText = '';
+
   Future<void> sendImageToServer(File imageFile) async {
-    var uri = Uri.parse('https://b5e2-36-68-221-238.ngrok-free.app/process_image');
+    var uri =
+        Uri.parse('https://5a04-114-6-31-174.ngrok-free.app/process_image');
 
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('image', imageFile.path));
 
     try {
-        var response = await request.send();
+      var response = await request.send();
 
-        if (response.statusCode == 200) {
-            var responseBody = await response.stream.bytesToString();
-            print("Response from server: $responseBody"); // Debugging: Tampilkan respons dari server
+      if (response.statusCode == 200) {
+        var responseBody = await response.stream.bytesToString();
+        print("Response from server: $responseBody");
 
-            setState(() {
-                resultText = responseBody;
-            });
-        } else {
-            print("Failed to get OCR result from server");
-            setState(() {
-                resultText = "tidak bisa";
-            });
-        }
+        setState(() {
+          resultText = responseBody;
+        });
+      } else {
+        print("Failed to get OCR result from server");
+        setState(() {
+          resultText = "tidak bisa";
+        });
+      }
     } catch (e) {
-        print("Error sending image to server: $e");
+      print("Error sending image to server: $e");
     }
   }
 
@@ -93,6 +98,8 @@ class _MyPageState extends State<MyPage> {
       setState(() {
         imageFile = File(pickedFile.path);
         sendImageToServer(imageFile!);
+        // Simpan gambar ke galeri
+        GallerySaver.saveImage(imageFile!.path);
       });
     }
   }
@@ -103,8 +110,11 @@ class _MyPageState extends State<MyPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Image Picker"),
+        title: const Text("OCR | Kelompok 5"),
+        backgroundColor: NowUIColors.primary,
+        centerTitle: true,
       ),
+      drawer: NowDrawer(currentPage: "ocr"), // Tambahkan drawer di sini
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -115,7 +125,7 @@ class _MyPageState extends State<MyPage> {
             child: DottedBorder(
               borderType: BorderType.RRect,
               radius: const Radius.circular(12),
-              color: Colors.blueGrey,
+              color: NowUIColors.primary,
               strokeWidth: 1,
               dashPattern: const [5, 5],
               child: SizedBox.expand(
@@ -124,7 +134,7 @@ class _MyPageState extends State<MyPage> {
                       ? Image.file(File(imageFile!.path), fit: BoxFit.cover)
                       : const Icon(
                           Icons.image_outlined,
-                          color: Colors.blueGrey,
+                          color: NowUIColors.primary,
                         ),
                 ),
               ),
@@ -140,7 +150,7 @@ class _MyPageState extends State<MyPage> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.blueGrey,
+                  color: NowUIColors.primary,
                 ),
                 child: Material(
                   borderRadius: BorderRadius.circular(20),
@@ -175,7 +185,7 @@ class _MyPageState extends State<MyPage> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.blueGrey,
+                  color: NowUIColors.primary,
                 ),
                 child: Material(
                   borderRadius: BorderRadius.circular(20),
@@ -186,7 +196,7 @@ class _MyPageState extends State<MyPage> {
                     onTap: () {
                       setState(() {
                         imageFile = null;
-                        resultText = ''; // Clear result text when clearing image
+                        resultText = '';
                       });
                     },
                     child: const Center(
@@ -203,7 +213,6 @@ class _MyPageState extends State<MyPage> {
               ),
             ),
           ),
-          // Widget untuk menampilkan hasil teks
           const Text(
             "Hasil",
             style: TextStyle(fontSize: 16.0),

@@ -21,7 +21,7 @@ class _MyPageState extends State<MyPage> {
 
   Future<void> sendImageToServer(File imageFile) async {
     var uri =
-        Uri.parse('https://5a04-114-6-31-174.ngrok-free.app/process_image');
+        Uri.parse(' https://8b69-180-248-24-169.ngrok-free.app/process_image');
 
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('image', imageFile.path));

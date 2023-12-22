@@ -11,15 +11,6 @@ class NowDrawer extends StatelessWidget {
 
   NowDrawer({required this.currentPage});
 
-  // _launchURL() async {
-  //   const url = 'https://creative-tim.com';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

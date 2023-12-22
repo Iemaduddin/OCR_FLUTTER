@@ -18,14 +18,12 @@ final Map<String, Map<String, String>> homeCards = {
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
   },
   "Didin": {
-    "title":
-        "Iemaduddin. Aku Didin. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "title": "Iemaduddin. Aku Didin. Lorem ipsum dolor sit.",
     "image":
         "https://images.unsplash.com/photo-1519368358672-25b03afee3bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80"
   },
   "Anhar": {
-    "title":
-        "Kholid Maulidi. Aku Anhar. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "title": "Kholid Maulidi. Aku Anhar. Lorem ipsum dolor.",
     "image":
         "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/now-ui-pro-react-native/bg40.jpg"
   },
